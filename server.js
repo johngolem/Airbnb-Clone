@@ -15,6 +15,8 @@ const app = express();
 app.use(express.json());
 app.use(urlencoded({ extended: false }));
 
+app.use("/api/orders", require("./backend/routes/order"));
+
 const users = [];
 
 console.log(`here is the ${process.env.MONGO_URI}`);
