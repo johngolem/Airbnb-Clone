@@ -17,7 +17,7 @@ const postOrder = asyncHandler(async (req, res) => {
     pages: req.body.pages,
     discipline: req.body.discipline,
     deadline: req.body.deadline,
-    orderDetails: req.body.orderDetails,
+    orderDetails: req.body.orderDetails, 
   });
   res.status(200).json({ order });
 });
