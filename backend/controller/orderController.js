@@ -1,25 +1,29 @@
-const asyncHandler = require("express-async-handler");
+const Orders = require("../models/orderModel");
+const expressAsyncHandler = require("express-async-handler");
 
-const Order = require("../models/orderModel");
-
-const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find();
-  res.json(orders);
-});
-
-const postOrder = asyncHandler(async (req, res) => {
-  if (!req.body) {
-    res.status(400);
-    throw new Error("Please add the order details");
-  }
-
-  const order = await Order.create({
-    pages: req.body.pages,
-    discipline: req.body.discipline,
-    deadline: req.body.deadline,
-    orderDetails: req.body.orderDetails, 
+const postOrders = expressAsyncHandler(async (req, res) => {
+  const order = new Orders({
+    pages: 24,
+    discipline: "English",
+    deadline: 56,
+    orderDetails: "Come get served",
   });
-  res.status(200).json({ order });
+  try {
+    const savedOrder = await order.save().then((savedOrder) => {
+      res.json(savedOrder);
+    });
+  } catch (err) {
+    res.status(400).send("error posting the order");
+  }
 });
 
-module.exports = { getOrders, postOrder };
+const getOrders = expressAsyncHandler(async (req, res) => {
+  try {
+    const order = await Orders.find();
+    res.json(order);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+module.exports = { getOrders, postOrders };
