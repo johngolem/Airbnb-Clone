@@ -280,4 +280,7 @@ const listingSchema = mongoose.Schema({
   },
 });
 
+// module.exports = mongoose.model("listingsAndReviews", listingSchema);
+
 module.exports = mongoose.model("listingsAndReviews", listingSchema);
+// module.exports = mongoose.model("ListingAndReview", listingSchema);

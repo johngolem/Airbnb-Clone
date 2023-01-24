@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 
 const listing = require("./routes/review");
 const orders = require("./routes/order");
+const users = require("./routes/users");
 
 // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
@@ -22,6 +23,7 @@ app.use(urlencoded({ extended: false }));
 
 app.use("/api/orders", orders);
 app.use("/api/listing", listing);
+app.use("/api/users", users);
 
 console.log(`here is the ${process.env.MONGO_URI}`);
 
